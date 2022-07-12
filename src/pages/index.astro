@@ -1,75 +1,193 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Subheading from '../components/Subheading.astro';
 
-const title = "SmartController.org";
+const title = "SmartController.js";
 ---
+
 <Layout title={title}>
-	<main>
-		<h1 style="text-align: center"><span class="text-gradient">{title}</span></h1>
-		<p class="instructions">
-			Check out the <code>src/pages</code> directory to get started.<br/>
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card href="https://docs.astro.build/" title="Documentation" body="Learn how Astro works and explore the official API docs." /> 
-			<Card href="https://astro.build/integrations/" title="Integrations" body="Supercharge your project with new frameworks and libraries." /> 
-			<Card href="https://astro.build/themes/" title="Themes" body="Explore a galaxy of community-built starter themes." /> 
-			<Card href="https://astro.build/chat/" title="Chat" body="Come say hi to our amazing Discord community. ❤️" />
-		</ul>
-	</main>
+  <main>
+    <script is:inline src="https://unpkg.com/smartcontroller@3.2.5/dist/smartcontroller.min.js"> </script>
+
+    <script is:inline>
+      var pos = 0
+      var prevpos = 0
+      var direction = false
+      var simplePeer;
+      var joystick;
+      var coordinates = {};
+
+      window.addEventListener('load', function () { // I'm only using this to make sure the script is loaded so if you have a better way you can screp this line
+        simplePeer = new smartcontroller.TouchPadSmartController();
+        simplePeer.createQrCode('https://smartcontrollerjs.github.io/Controllers/touchpad.html', 'qrcode', 250, 250, '1');
+
+        simplePeer.on("connection", function (data) {
+
+          console.log("hello2");
+        })
+        simplePeer.on("data", function (data) {
+          joystick = simplePeer.controllerList[1]
+
+          if (joystick.isActive) {
+            var ypos = joystick.state[0][1]
+
+            if (ypos > prevpos) {
+              direction = false
+            }
+            else {
+              direction = true
+            }
+
+            console.log(direction)
+
+            prevpos = ypos
+          }
+
+          if (direction) {
+            pos = -10
+
+          }
+
+          else {
+            pos = 10
+          }
+
+          window.scrollBy(0, pos);
+        })
+      })
+
+
+    </script>
+
+    <section style="background-color:F3E8EE">
+      <h1><span>{title}</span></h1>
+
+      <div class="scan-text">Scan me to begin</div>
+      <div class="qrcode" id="qrcode"></div>
+      <div class="qrcode">How does this work? Read on to find out</div>
+      <div style="position:absolute; top:40%;">
+        <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
+      </div>
+
+    </section>
+    <section style="background-color:beige">
+      <Subheading title="What is SmartController.js">{title}</Subheading>
+    </section>
+    <section style="background-color:coral">
+      <Subheading title="What did we implement?">{title}</Subheading>
+    </section>
+    <section style="background-color: lightpink;">
+      <Subheading title="Experiments + results">{title}</Subheading>
+    </section>
+    <section style="background-color:seagreen">
+      <Subheading title="Discussion + trends">{title}</Subheading>
+    </section>
+    <section style="background-color:antiquewhite">
+      <Subheading title="Future Work">{title}</Subheading>
+    </section>
+
+
+  </main>
 </Layout>
 
 <style>
-	:root {
-		--astro-gradient: linear-gradient(0deg,#4F39FA, #DA62C4);
-	}
+  :root {
+    --astro-gradient: linear-gradient(0deg, #4F39FA, #DA62C4);
+  }
 
-	h1 {
-		margin: 2rem 0;
-	}
+  h1 {
+    margin: 2rem 0;
+    font-size: 6em;
+    text-align: right;
+    height: fit-content;
+    position: absolute;
+    top: 30%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 10%;
+  }
 
-	main {
-		margin: auto;
-    	padding: 1em;
-		max-width: 100%;
-	}
+  .qrcode {
+    right: 30%;
+    position: relative;
+    margin: 0;
+  }
 
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
+  .scan-text {
+    font-family: monospace;
+    right: 30%;
+    margin-top: 13%;
+    position: relative;
+    font-size: 2em;
+  }
 
-	@keyframes pulse {
-		0%, 100% { background-position-y: 0%; }
-		50% { background-position-y: 80%; }
-	}
+  main {
+    margin: auto;
+    /* padding: 1em; */
+    max-width: 100%;
+  }
 
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		background: #4F39FA;
-		padding: 1.0rem;
-		border-radius: 0.4rem;
-		color: var(--color-bg);
-	}
+  section {
+    position: relative;
+    font-family: sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: baseline; */
+    align-items: center;
+    top: 0;
+  }
 
-	.instructions code {
-		font-size: 0.875em;
-		border: 0.1em solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.15em 0.25em;
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  .text-gradient {
+    font-weight: 900;
+    background-image: var(--astro-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100% 200%;
+    background-position-y: 100%;
+    border-radius: 0.4rem;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      background-position-y: 0%;
+    }
+
+    50% {
+      background-position-y: 80%;
+    }
+  }
+
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    background: #4F39FA;
+    padding: 1.0rem;
+    border-radius: 0.4rem;
+    color: var(--color-bg);
+  }
+
+  .instructions code {
+    font-size: 0.875em;
+    border: 0.1em solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.15em 0.25em;
+  }
+
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    text-align: center;
+  }
 </style>

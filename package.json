@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "astro": "^1.0.0-beta.63"
+  },
+  "dependencies": {
+    "smartcontroller": "^3.2.5"
   }
 }
