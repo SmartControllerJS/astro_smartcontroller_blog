@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Subheading from '../components/Subheading.astro';
+import Contact from '../components/Contact.astro';
 
 const title = "SmartController.js";
 ---
@@ -47,12 +48,12 @@ const title = "SmartController.js";
 
     </script>
 
-    <section style="background-color:F3E8EE">
+    <section style="background-color:#fef9ef">
       <h1><span>{title}</span></h1>
 
       <div class="scan-text">Scan me to begin</div>
       <div class="qrcode" id="qrcode"></div>
-      <div class="qrcode">How does this work? Read on to find out</div>
+      <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
       <div style="position:absolute; top:40%;">
         <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
       </div>
