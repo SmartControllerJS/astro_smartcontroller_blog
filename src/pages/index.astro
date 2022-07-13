@@ -1,14 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import Subheading from '../components/Subheading.astro';
-import Contact from '../components/Contact.astro';
 
 const title = "SmartController.js";
 ---
 
 <Layout title={title}>
+
+
   <main>
+
+    <div class="wrapper">
+      <div class="sidebar">
+        <h2>Sidebar</h2>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#smartcontroller">Smartcontroller.js</a></li>
+          <li><a href="#implemented">Implemented</a></li>
+          <li><a href="#experiments">Experiments</a></li>
+          <li><a href="#discussion">Discussion</a></li>
+          <li><a href="#future">Future Work</a></li>
+        </ul>
+      </div>
+    </div>
+
     <script is:inline src="https://unpkg.com/smartcontroller@3.2.6/dist/smartcontroller.min.js"> </script>
 
     <script is:inline>
@@ -48,7 +63,9 @@ const title = "SmartController.js";
 
     </script>
 
-    <section style="background-color:#fef9ef">
+
+
+    <section id="home" style="background-color:#fef9ef">
       <h1><span>{title}</span></h1>
 
       <div class="scan-text">Scan me to begin</div>
@@ -59,19 +76,19 @@ const title = "SmartController.js";
       </div>
 
     </section>
-    <section style="background-color:beige">
+    <section id="smartcontroller" style="background-color:beige">
       <Subheading title="What is SmartController.js">{title}</Subheading>
     </section>
-    <section style="background-color:coral">
+    <section id="implemented" style="background-color:coral">
       <Subheading title="What did we implement?">{title}</Subheading>
     </section>
-    <section style="background-color: lightpink;">
+    <section id="experiments" style="background-color: lightpink;">
       <Subheading title="Experiments + results">{title}</Subheading>
     </section>
-    <section style="background-color:seagreen">
+    <section id="discussion" style="background-color:seagreen">
       <Subheading title="Discussion + trends">{title}</Subheading>
     </section>
-    <section style="background-color:antiquewhite">
+    <section id="future" style="background-color:antiquewhite">
       <Subheading title="Future Work">{title}</Subheading>
     </section>
 
@@ -80,8 +97,43 @@ const title = "SmartController.js";
 </Layout>
 
 <style>
+  * {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+  }
+
   :root {
     --astro-gradient: linear-gradient(0deg, #4F39FA, #DA62C4);
+  }
+
+  .wrapper {
+    display: flex;
+    position: relative;
+  }
+
+
+  .wrapper .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background: #4b4276;
+    z-index: 1;
+    padding: 30px 0;
+  }
+
+  .wrapper .sidebar h2 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .wrapper .sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(225, 225, 225, 0.05);
   }
 
   h1 {
@@ -95,6 +147,24 @@ const title = "SmartController.js";
     transform: translateY(-50%);
     right: 10%;
   }
+
+  .wrapper .sidebar ul li a {
+    color: #bdb8d7;
+    display: block;
+  }
+
+  .wrapper .sidebar ul li:hover {}
+
+  .wrapper .sidebar ul li:hover {
+    background: #594f8d;
+  }
+
+  .wrapper .sidebar ul li:hover a {
+    color: #fff;
+  }
+
+
+
 
   .qrcode {
     right: 30%;
