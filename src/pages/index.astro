@@ -42,7 +42,7 @@ const title = "SmartController.js";
         simplePeer.on("data", function (data) {
           message = data.data.data;
           if (message.type == "button") {
-            document.getElementById(message.button_id).scrollIntoView();;
+            document.getElementById(message.button_id).scrollIntoView();
           }
           else if (message.type == "touchpad") {
             touchpad = simplePeer.controllerList[1]
@@ -117,7 +117,7 @@ const title = "SmartController.js";
     --astro-gradient: linear-gradient(0deg, #4F39FA, #DA62C4);
   }
 
-  .wrapper {
+  /* .wrapper {
     display: flex;
     position: relative;
   }
@@ -143,7 +143,23 @@ const title = "SmartController.js";
     padding: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 1px solid rgba(225, 225, 225, 0.05);
+  } */
+
+
+  /* .wrapper .sidebar ul li a {
+    color: #bdb8d7;
+    display: block;
   }
+
+  .wrapper .sidebar ul li:hover {}
+
+  .wrapper .sidebar ul li:hover {
+    background: #594f8d;
+  }
+
+  .wrapper .sidebar ul li:hover a {
+    color: #fff;
+  } */
 
   h1 {
     margin: 2rem 0;
@@ -157,29 +173,13 @@ const title = "SmartController.js";
     right: 10%;
   }
 
-  .wrapper .sidebar ul li a {
-    color: #bdb8d7;
-    display: block;
-  }
-
-  .wrapper .sidebar ul li:hover {}
-
-  .wrapper .sidebar ul li:hover {
-    background: #594f8d;
-  }
-
-  .wrapper .sidebar ul li:hover a {
-    color: #fff;
-  }
-
-
-
-
   .qrcode {
     right: 30%;
     position: relative;
     margin: 0;
     font-size: 1vw;
+    /* width: 150;
+    height: 150; */
   }
 
   .scan-text {
