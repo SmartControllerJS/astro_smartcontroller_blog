@@ -24,7 +24,7 @@ const title = "SmartController.js";
       </div>
     </div> -->
 
-    <script is:inline src="https://unpkg.com/smartcontroller@3.2.6/dist/smartcontroller.min.js"> </script>
+    <script is:inline src="https://unpkg.com/smartcontroller@3.2.7/dist/smartcontroller.min.js"> </script>
 
     <script is:inline>
       var pos = 0
@@ -33,28 +33,33 @@ const title = "SmartController.js";
 
       window.addEventListener('load', function () {
         simplePeer = new smartcontroller.ScrollSmartController('123456789', firstConnected = true);
-        simplePeer.createQrCode('https://smartcontrollerjs.github.io/Controllers/touchpad.html', 'qrcode', 150, 150, '1');
+        simplePeer.createQrCode('https://smartcontrollerjs.github.io/Controllers/blog_scroll.html', 'qrcode', 150, 150, '1');
 
         simplePeer.on("connection", function (data) {
           console.log(simplePeer.controllerList)
         })
 
         simplePeer.on("data", function (data) {
-          touchpad = simplePeer.controllerList[1]
+          message = data.data.data;
+          if (message.type == "button") {
+            document.getElementById(message.button_id).scrollIntoView();;
+          }
+          else if (message.type == "touchpad") {
+            touchpad = simplePeer.controllerList[1]
 
-          if (touchpad.isActive) {
+            if (touchpad.isActive) {
 
-            if (touchpad.direction) {
-              pos = -25
-            }
+              if (touchpad.direction) {
+                pos = -25
+              }
 
-            else {
-              pos = 25
+              else {
+                pos = 25
+              }
+
             }
 
           }
-
-
           window.scrollBy(0, pos);
         })
 
