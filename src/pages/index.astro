@@ -10,19 +10,7 @@ const title = "SmartController.js";
 
   <main>
 
-    <div class="wrapper">
-      <div class="sidebar">
-        <h2>SC.org</h2>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#smartcontroller">Smartcontroller.js</a></li>
-          <li><a href="#implemented">Implemented</a></li>
-          <li><a href="#experiments">Experiments</a></li>
-          <li><a href="#discussion">Discussion</a></li>
-          <li><a href="#future">Future Work</a></li>
-        </ul>
-      </div>
-    </div>
+
 
     <script is:inline src="https://unpkg.com/smartcontroller@3.2.7/dist/smartcontroller.min.js"> </script>
 
@@ -69,7 +57,21 @@ const title = "SmartController.js";
     </script>
 
 
+<div class="wrapper">
+  <div class="sidebar">
+    <h2>SC.org</h2>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#smartcontroller">Smartcontroller.js</a></li>
+      <li><a href="#implemented">Implemented</a></li>
+      <li><a href="#experiments">Experiments</a></li>
+      <li><a href="#discussion">Discussion</a></li>
+      <li><a href="#future">Future Work</a></li>
+    </ul>
+  </div>
+</div>
 
+    <div class="section-container">
     <section id="home" style="background-color:#fef9ef">
       <h1><span>{title}</span></h1>
 
@@ -100,6 +102,7 @@ const title = "SmartController.js";
     <section id="future" style="background-color:antiquewhite">
       <Subheading title="Future Work">{title}</Subheading>
     </section>
+  </div>
 
 
   </main>
@@ -118,14 +121,13 @@ const title = "SmartController.js";
   }
 
  .wrapper {
-    display: flex;
     position: relative;
   }
 
 
   .wrapper .sidebar {
     position: fixed;
-    width: 200px;
+    width: 14%;
     height: 100%;
     background: #4b4276;
     z-index: 1;
@@ -200,6 +202,9 @@ const title = "SmartController.js";
     position: relative;
     font-family: sans-serif;
     min-height: 100vh;
+    max-width: 86%;
+    left: 14%;
+    flex-flow: column;
     display: flex;
     flex-direction: column;
     /* justify-content: baseline; */
