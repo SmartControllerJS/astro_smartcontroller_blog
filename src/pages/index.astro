@@ -124,10 +124,9 @@ const title = "SmartController.js";
     position: relative;
   }
 
-
   .wrapper .sidebar {
     position: fixed;
-    width: 14%;
+    width: 16%;
     height: 100%;
     background: #4b4276;
     z-index: 1;
@@ -146,7 +145,6 @@ const title = "SmartController.js";
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 1px solid rgba(225, 225, 225, 0.05);
   } 
-
 
   .wrapper .sidebar ul li a {
     color: #bdb8d7;
@@ -172,7 +170,7 @@ const title = "SmartController.js";
     top: 30%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    right: 10%;
+    right: 6%;
   }
 
   .qrcode {
@@ -195,7 +193,8 @@ const title = "SmartController.js";
   main {
     margin: auto;
     /* padding: 1em; */
-    max-width: 100%;
+    max-width: 800%;
+    overflow-x: hidden;
   }
 
   section {
@@ -204,7 +203,6 @@ const title = "SmartController.js";
     min-height: 100vh;
     max-width: 86%;
     left: 14%;
-    flex-flow: column;
     display: flex;
     flex-direction: column;
     /* justify-content: baseline; */
