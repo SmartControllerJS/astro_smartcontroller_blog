@@ -40,7 +40,7 @@ const title = "SmartController.js";
         })
 
         simplePeer.on("data", function (data) {
-          touchpad = simplePeer.controllerList[1]
+          touchpad = simplePeer.controllerList[0]
 
           if (touchpad.isActive) {
 
