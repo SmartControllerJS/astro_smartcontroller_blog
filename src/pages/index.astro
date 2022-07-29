@@ -64,9 +64,9 @@ const title = "SmartController.js";
         <h2>SC.org</h2>
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#smartcontroller">Smartcontroller.js</a></li>
-          <li><a href="#implemented">Implemented</a></li>
-          <li><a href="#experiments">Experiments</a></li>
+          <li><a href="#smartcontroller">SmartController.js</a></li>
+          <li><a href="#gottagraduate">Gotta Graduate</a></li>
+          <li><a href="#coinchaser">Coinchaser</a></li>
           <li><a href="#discussion">Discussion</a></li>
           <li><a href="#future">Future Work</a></li>
         </ul>
@@ -76,34 +76,333 @@ const title = "SmartController.js";
     <div class="section-container">
       <section id="home" style="background-color:#fef9ef">
         <h1><span>{title}</span></h1>
-
         <div class="scan-text">Scan me to begin</div>
         <div class="qrcode" id="qrcode"></div>
         <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
         <div style="position:absolute; top:40%;">
           <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
         </div>
+      </section>
 
-      </section>
-      <section id="smartcontroller" style="background-color:beige">
+      <hr>
+
+      <section id="smartcontroller">
         <Subheading title="What is SmartController.js">{title}</Subheading>
+        <div class="row">
+          <div class="column">
+            <h3>Overview of Library</h3>
+            <p>
+              SmartControllerJS is written in JavaScript. It uses the
+              PeerJS library to facilitate the peer-to-peer connection,
+              and EventEmitter2 to monitor and trigger events. The
+              library is bundled with Parcel and published on npm, the
+              most popular package managers for javascript libraries
+              and widely used by web developers. The two main
+              building blocks of the library are the SmartController
+              and SmartPhoneController classes. Figure 2 gives the
+              general overview of how the two classes work together.
+              <br><br>
+              The SmartController class is used in the computer
+              browser, managing all incoming connections from
+              smartphones and handling the data input. The class
+              also creates various events such as: new connections;
+              incoming data; and closing of channels. The PeerJS
+              object instantiates a peer ID to which a listener can
+              establish a connection. The SmartController class
+              maintains a list of connected smartphones listed by
+              peer IDs and creates controller objects that store and
+              manage the data of each smartphone. The class is also
+              responsible for deleting list entries when a user disconnects. Lastly, the SmartController has a method
+              for
+              creating and displaying QR codes, using EasyQRCodeJS.
+              <br><br>
+              SmartPhoneController is a class managing the peer
+              connection and message passing on the smartphone
+              browser. The smartphone-to-computer connection is
+              fully automated and handled upon SmartPhoneController object creation, and all parameters necessary for
+              the connection are specified and read from the URL.
+              The SmartPhoneController class has a single method to
+              send data to the computer browser, which can include
+              statistics or any relevant information produced by the
+              users’ interaction with the controller. The message
+              frequency can be limited by setting a throttle which
+              specifies how often messages should be sent during
+              an interval, ignoring
+            </p>
+          </div>
+          <div class="column">
+            <h3>Connection</h3>
+            <p>An integral aspect of SmartControllerJS is the use of
+              Web Real-Time Communication or WebRTC. WebRTC
+              allows establishing peer-to-peer (P2P) communication
+              between browsers without requiring an intermediary
+              server or application and allows sharing video, audio,
+              and generic data. It only requires a lightweight signalling
+              server for the initial set-up by allowing two peers to
+              “find each other”. <br><br>
+              In the SmartController library, a peer ID identifies
+              the computer browser and is passed as an argument to
+              the URL of the smartphone controller. For example,
+              for the touchpad controller, an application with a
+              peer ID of ‘123456789’ should ask the user to open
+              https://smartcontrollerjs.github.io/Controllers/touchpad
+              .html?id=123456789 on their smartphone. A QR code
+              is automatically generated to pass this information to a
+              smartphone with minimal friction. <br><br>
+              Once a connection between a smartphone and a
+              computer is established, the SmartController will store
+              this connection in a list before generating and storing the new controller object. As many connections
+              can be established and will be listed in order in the
+              SmartController instance. Sometimes you will need
+              to be able to identify specific users. An argument,
+              called playerid, can be passed to the controller URL
+              to uniquely identify a user. Following our example
+              above, a player called JohnDoe, could be identified as
+              https://smartcontrollerjs.github.io/Controllers/touchpad
+              .html?id=123456789playerid=JohnDoe. <br><br>
+              This is helpful for multiplayers games where we need
+              3
+              FIG. 2. Flow chart of basic steps to establish the peer-to-peer connection and send data.
+              to ensure a user is assigned a specific role. We include an
+              optional parameter, called firstConnected, to limit connection for a player ID to the first person
+              connecting, as
+              shown in Figure 2. This is useful to ensure a user does
+              not get kicked out of a session in mid-play. If there is
+              a player ID specified and firstConnected is true, SmartController will check if an ID is already stored in
+              the
+              connection list. If yes, no further connections to that ID
+              will be allowed. If firstConnected is set to false, every
+              new connection to the same player ID will overwrite the
+              original one.</p>
+          </div>
+          <div class="column">
+            <h3>Controllers</h3>
+            <p>The foundation of each controller type is a BaseController class, which is responsible for processing
+              data
+              for individual smartphones. As this is the most basic,
+              default version of a controller object, it only stores a
+              peer ID, a player ID (if specified), and statistic fields
+              for ping and message rate. For simplicity, each new
+              controller is created by extending this class and adding
+              new fields to expand the functionality. <br><br>
+              In the smartphone browser, controllers only need
+              to use the SmartPhoneController class to manage
+              connection and send data to the user. The community
+              has already created a range of controllers hosted on
+              GitHub that can be reused in their browser application.
+              Current controllers include a NES controller, a joystick,
+              a touchpad and an accelerometer. <br><br>
+              Each controller has a corresponding class that extends
+              BaseController and provides additional fields and methods specific to the controller. For example, the
+              TouchPad class adds a boolean isActive state that is True when
+              the player is interacting with the phone screen and False
+              otherwise, and the NesController class stores a button
+              dictionary containing the states of all buttons.
+            </p>
+          </div>
+        </div>
       </section>
-      <section id="implemented" style="background-color:coral;">
-        <Subheading title="What did we implement?">{title}</Subheading>
-        <iframe style="position: relative; margin:auto;"
-          src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="920vw" height="460vh"></iframe>
+
+      <hr>
+
+      <section id="gottagraduate">
+        <Subheading title="Gotta Graduate">{title}</Subheading>
+        <iframe class="iframe-style" style="position: relative; margin:auto;"
+          src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="90%" height="720vh">
+        </iframe>
       </section>
-      <section id="experiments" style="background-color: lightpink;">
-        <Subheading title="Experiments + results">{title}</Subheading>
-        <iframe style="position: relative; margin: auto; top:3vh" src="https://smartcontrollerjs.github.io/Coin-Chaser/"
-          width="920vw" height="540vh"></iframe>
+
+      <hr>
+
+      <section id="coinchaser">
+        <Subheading title="Coin Chaser">{title}</Subheading>
+        <iframe class="coinchaser" style="position: relative; margin: auto; top:3vh"
+          src="https://smartcontrollerjs.github.io/Coin-Chaser/" width="90%" height="540vh"></iframe>
       </section>
-      <section id="discussion" style="background-color:seagreen">
-        <Subheading title="Discussion + trends">{title}</Subheading>
+
+      <hr>
+
+      <section id="discussion">
+        <Subheading title="Discussion">{title}</Subheading>
+
+        <div class="row">
+          <div class="column">
+            <p>
+              The user interviews revealed that the library is easy
+              to use with tutorials available, well documented and
+              could be applied to replace mouse and keyboard input
+              9
+              in browser games.
+              For Gotta Graduate, we found that the Phaser
+              framework had an abundance of similarities to the
+              SmartController library. They both use JavaScript,
+              are npm packages, and their usage is the same. Once
+              both packages were imported, using the SmartController was a seamless experience upon following the
+              instructions on SmartControllerJS. The only issue that
+              arose was understanding how to connect the generated
+              QR code with the HTML of the webpage to ensure
+              it was displayed correctly. Using the SmartController
+              placed development focus on the core elements of the
+              gameplay rather than the intricacies of using a new
+              interaction method. Overall, we recommend Phaser as
+              a game engine compatible with SmartController. In
+              addition, JavaScript based libraries and frameworks
+              work effortlessly alongside the SmartController package
+              and are highly recommended to allow focus to be placed
+              on the application rather than the interaction method. <br> <br>
+
+              The Joystick Controller helped create a smooth experience for participants playing Gotta Graduate. The
+              dynamic, 360 movement allowed participants to focus
+              on their gameplay rather than using the controller. This
+              was an important aspect when choosing the controller
+              as more buttons on the controller would lead to a higher
+              learning curve and vice versa. However, development
+              was more advanced with the joystick as it needed to be
+              programmed to move in each direction using degrees
+              ranging from 0 to 360. This led to problems with players
+              repeatedly moving diagonally on the map of Gotta
+              Graduate - an undesirable side effect.
+            </p>
+          </div>
+          <div class="column">
+            <p>To cancel this
+              effect, depending on the axis of movement, the opposite
+              axis velocity would be set to 0, removing the accidental
+              diagonal movement for players. <br> <br>
+              After observing numerous groups and solo participants playing Gotta Graduate, it became clear that in a
+              public and social context, people playing in groups were
+              seemingly more engaged than their solo counterparts.
+              This was apparent after groups of players expressed
+              more willingness to interact with the game. It became
+              clear throughout the experiment that using the SmartController was a fluid enough interaction to allow
+              players
+              to feel comfortable using it within a public environment.
+              As participants were already accustomed to using QR
+              codes, there was little stopping them from instantly
+              understanding how to play and interact with the game
+              using the SmartController. Playing in groups often
+              led to social learning taking place - when participants
+              would help each other understand foreign concepts or
+              tools. Once one player understood the SmartController,
+              they would often take the time to explain it to their
+              fellow participants, allowing them to begin the game.
+              This provides further evidence of the success of the
+              SmartController as a means for interacting with the
+              general public. <br><br>
+              For Coin Chaser, once the communication between
+              the browser script and Unity game was established, the
+              SmartController was easy and simple to implement. The
+              various demos on SmartControllerJS effectively guided
+              the methods to generate, and display, a QR code as well
+              as to implement the selected NES controller. Observing
+              the results obtained from the Coin Chaser evaluation,
+              it can be seen that the SmartController library has
+              the potential for wider deployment with Unity browser
+              games.
+            </p>
+          </div>
+          <div class="column">
+            <p>
+
+              The NES Controller was also very easy to implement
+              for Coin Chaser and was a simple task to connect the buttons on the interface to the expected inputs,
+              using them
+              as replacements for buttons seen on normal webpages.
+              Players were able to adapt quickly to the set control inputs, with experienced gamers adapting to the
+              controls
+              during the first game round and the less experienced players adapting during the second game round. o 0,
+              removing the accidental diagonal movement for players.
+            </p>
+          </div>
+        </div>
       </section>
+
+
       <section id="future" style="background-color:antiquewhite">
         <Subheading title="Future Work">{title}</Subheading>
+
+        <div class="row">
+          <div class="column">
+            <p>
+              SmartController should prioritise controllers compatible with all devices and browsers. For example,
+              the joystick controller should be remade without using
+              the Nipple.js library to provide a joystick that works
+              correctly on all devices. The documentation on how to
+              implement a custom controller should also be improved,
+              with step-by-step instructions. In the same vein, we plan
+              to cover how to interface SmartController with various
+              game frameworks, such as Phaser and Unity, and will
+              include a dedicated section on multiplayer capabilities. <br><br>
+              Our aim is to expand the number and type of controllers available. For instance, modern phones have an
+              abundance of technology that is currently untapped such
+              as cameras, gyroscopes, proximity sensors, and more.
+              One could easily imagine detecting hand motion using
+              image recognition from a camera sensor and using it to
+              manipulate web-applications. This would complement
+              the current task of the SmartController and provide
+              a suitable alternative to using a smartphone’s touch
+              capabilities.
+
+            </p>
+          </div>
+          <div class="column">
+            <p>Beyond the library it-self, we believe the SmartController concept could be expanded in two directions.
+              The first direction is to enable A/B testing and the
+              hyper personalisation of controllers. Applying best
+              practices from web development to the development of
+              controllers might be a promising approach. For example,
+              players of mainstream gaming consoles, such as the
+              Playstation or Xbox, experience games using a unique
+              physical controller. However, some games might benefit
+              from extremely customised controllers and the quality of
+              these controllers could be decided by experimentation.
+              A/B testing is one way to do so in a data driven way.
+              Another approach could be to cluster users and ship a
+              different controller per user, or, even further, evolve or
+              optimise a controller to the needs and preferences of
+              a specific user. We have experimented at the extreme
+              end of this space with a PIN entering interface, called
+              IFTTT-PIN [6], that allows users to decide which button
+              to use for which action on the fly, without informing
+              the web-app, see IFFT-PIN. Combining IFTT-PIN
+              concepts with SmartControllerJS capabilities and A/B
+              testing principles is a promising way towards highly
+              customisable user interfaces.
+
+            </p>
+          </div>
+          <div class="column">
+            <p>
+              The second direction is to expand the SmartControllert concept to physical objects. Could we scan a
+              QR code on our TV and control it with our phone?
+              Could children’s toys be controlled that way? Could we
+              offer the user the ability to reprogram those physical
+              objects along with the interaction we propose with
+              SmartController? In the spirit of SmartController this
+              should be accomplished via a web page requiring no
+              installation, no server cost, and be easy to scale. <br><br>
+              We are exploring this using Espruino, a framework to
+              run Javascript on a microcontroller. With web-bluetooth
+              capabilities, it is possible to connect and reprogram a
+              device directly from your browser and on your phone.
+              We developed the Espruino Remote Uploader tool to
+              facilitate experimentation, for which a demo can be
+              found at https://cmurray95.github.io/espruino-remoteuploader/demos/puck/colour.html. The user can connect
+              to the device, upload custom code, and interact
+              with it via its smartphone. Pushing this concept further, we developed a self-driving robot that is
+              controlled
+              directly by a smartphone from a webpage. You can
+              find this project at https://github.com/Kirstin813/L4-
+              Individual-Project which includes many video demonstrations. <br><br>
+              If you have any questions, you
+              can raise an issue on GitHub at
+              https://github.com/SmartControllerJS/SmartController
+              or directly email the authors.
+            </p>
+          </div>
+        </div>
       </section>
+
     </div>
 
 
@@ -124,11 +423,12 @@ const title = "SmartController.js";
 
   .wrapper {
     position: relative;
+    word-wrap: break-word;
   }
 
   .wrapper .sidebar {
     position: fixed;
-    width: 16%;
+    width: 10%;
     height: 100%;
     background: #4b4276;
     z-index: 1;
@@ -195,7 +495,6 @@ const title = "SmartController.js";
   main {
     margin: auto;
     /* padding: 1em; */
-    max-width: 800%;
     overflow-x: hidden;
   }
 
@@ -203,18 +502,58 @@ const title = "SmartController.js";
     position: relative;
     font-family: sans-serif;
     min-height: 100vh;
-    max-width: 86%;
-    left: 14%;
+    max-width: 90%;
+    left: 10%;
     display: flex;
     flex-direction: column;
     /* justify-content: baseline; */
     align-items: center;
     top: 0;
+    background-color: #fef9ef
   }
 
   .sticky {
     position: sticky;
     top: 0;
     text-align: center;
+  }
+
+  @media (max-width: 1440px) {
+    .iframe-style {
+      height: 84vh;
+    }
+
+    .coinchaser {
+      height: 70vh;
+    }
+  }
+
+  hr {
+    border: 15px solid #4b4276;
+    border-radius: 30px;
+    width: 50%;
+    visibility: hidden;
+  }
+
+
+  .column {
+    float: left;
+    width: 31%;
+    margin-right: 1%;
+  }
+
+  .row {
+    margin-top: 5%;
+    margin-left: 3%;
+    margin-right: 1%;
+    left: 5%;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+
   }
 </style>
