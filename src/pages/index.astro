@@ -35,7 +35,7 @@ const title = "SmartController.js";
             document.getElementById(message.button_id).scrollIntoView();
           }
           else if (message.type == "touchpad") {
-            touchpad = simplePeer.controllerList[0]
+            touchpad = simplePeer.controllerList[Object.keys(simplePeer.controllerList)[0]];
 
             if (touchpad.isActive) {
 
