@@ -72,38 +72,55 @@ const title = "SmartController.js";
     </div>
 
     <div class="section-container">
+
       <section id="home" style="background-color:#fef9ef">
         <h1><span>{title}</span></h1>
-
         <div class="scan-text">Scan me to begin</div>
         <div class="qrcode" id="qrcode"></div>
         <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
         <div style="position:absolute; top:40%;">
           <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
         </div>
-
       </section>
+
+      <hr>
+
       <section id="smartcontroller">
         <Subheading title="What is SmartController.js">{title}</Subheading>
-      </section>
-      <section id="implemented">
-        <Subheading title="What did we implement?">{title}</Subheading>
+        <p>
 
+        </p>
+      </section>
+
+      <hr>
+
+      <section id="implemented">
+        <Subheading title="Demos">{title}</Subheading>
         <iframe class="iframe-style" style="position: relative; margin:auto;"
           src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="90%" height="720vh">
         </iframe>
       </section>
-      <section id="experiments" style="background-color: lightpink;">
+
+      <hr>
+
+      <section id="experiments">
         <Subheading title="Experiments + results">{title}</Subheading>
         <iframe class="coinchaser" style="position: relative; margin: auto; top:3vh"
           src="https://smartcontrollerjs.github.io/Coin-Chaser/" width="90%" height="540vh"></iframe>
       </section>
-      <section id="discussion" style="background-color:seagreen">
+
+      <hr>
+
+      <section id="discussion">
         <Subheading title="Discussion + trends">{title}</Subheading>
       </section>
+
+      <hr>
+
       <section id="future" style="background-color:antiquewhite">
         <Subheading title="Future Work">{title}</Subheading>
       </section>
+
     </div>
 
 
@@ -226,8 +243,13 @@ const title = "SmartController.js";
 
     .coinchaser {
       height: 70vh;
-      ;
     }
+  }
 
+  hr {
+    border: 15px solid #4b4276;
+    border-radius: 30px;
+    width: 50%;
+    visibility: hidden;
   }
 </style>
