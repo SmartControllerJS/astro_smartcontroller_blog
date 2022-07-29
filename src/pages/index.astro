@@ -95,8 +95,8 @@ const title = "SmartController.js";
       </section>
       <section id="experiments" style="background-color: lightpink;">
         <Subheading title="Experiments + results">{title}</Subheading>
-        <iframe style="position: relative; margin: auto; top:3vh" src="https://smartcontrollerjs.github.io/Coin-Chaser/"
-          width="920vw" height="540vh"></iframe>
+        <iframe class="coinchaser" style="position: relative; margin: auto; top:3vh"
+          src="https://smartcontrollerjs.github.io/Coin-Chaser/" width="90%" height="540vh"></iframe>
       </section>
       <section id="discussion" style="background-color:seagreen">
         <Subheading title="Discussion + trends">{title}</Subheading>
@@ -222,7 +222,11 @@ const title = "SmartController.js";
   @media (max-width: 1440px) {
     .iframe-style {
       height: 84vh;
-      color: #4b4276
+    }
+
+    .coinchaser {
+      height: 70vh;
+      ;
     }
 
   }
