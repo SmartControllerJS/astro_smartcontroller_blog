@@ -87,9 +87,119 @@ const title = "SmartController.js";
 
       <section id="smartcontroller">
         <Subheading title="What is SmartController.js">{title}</Subheading>
-        <p>
-
-        </p>
+        <div class="row">
+          <div class="column">
+            <h3>Overview of Library</h3>
+            <p>
+              SmartControllerJS is written in JavaScript. It uses the
+              PeerJS library to facilitate the peer-to-peer connection,
+              and EventEmitter2 to monitor and trigger events. The
+              library is bundled with Parcel and published on npm, the
+              most popular package managers for javascript libraries
+              and widely used by web developers. The two main
+              building blocks of the library are the SmartController
+              and SmartPhoneController classes. Figure 2 gives the
+              general overview of how the two classes work together.
+              <br><br>
+              The SmartController class is used in the computer
+              browser, managing all incoming connections from
+              smartphones and handling the data input. The class
+              also creates various events such as: new connections;
+              incoming data; and closing of channels. The PeerJS
+              object instantiates a peer ID to which a listener can
+              establish a connection. The SmartController class
+              maintains a list of connected smartphones listed by
+              peer IDs and creates controller objects that store and
+              manage the data of each smartphone. The class is also
+              responsible for deleting list entries when a user disconnects. Lastly, the SmartController has a method
+              for
+              creating and displaying QR codes, using EasyQRCodeJS.
+              <br><br>
+              SmartPhoneController is a class managing the peer
+              connection and message passing on the smartphone
+              browser. The smartphone-to-computer connection is
+              fully automated and handled upon SmartPhoneController object creation, and all parameters necessary for
+              the connection are specified and read from the URL.
+              The SmartPhoneController class has a single method to
+              send data to the computer browser, which can include
+              statistics or any relevant information produced by the
+              users’ interaction with the controller. The message
+              frequency can be limited by setting a throttle which
+              specifies how often messages should be sent during
+              an interval, ignoring
+            </p>
+          </div>
+          <div class="column">
+            <h3>Connection</h3>
+            <p>An integral aspect of SmartControllerJS is the use of
+              Web Real-Time Communication or WebRTC. WebRTC
+              allows establishing peer-to-peer (P2P) communication
+              between browsers without requiring an intermediary
+              server or application and allows sharing video, audio,
+              and generic data. It only requires a lightweight signalling
+              server for the initial set-up by allowing two peers to
+              “find each other”. <br><br>
+              In the SmartController library, a peer ID identifies
+              the computer browser and is passed as an argument to
+              the URL of the smartphone controller. For example,
+              for the touchpad controller, an application with a
+              peer ID of ‘123456789’ should ask the user to open
+              https://smartcontrollerjs.github.io/Controllers/touchpad
+              .html?id=123456789 on their smartphone. A QR code
+              is automatically generated to pass this information to a
+              smartphone with minimal friction. <br><br>
+              Once a connection between a smartphone and a
+              computer is established, the SmartController will store
+              this connection in a list before generating and storing the new controller object. As many connections
+              can be established and will be listed in order in the
+              SmartController instance. Sometimes you will need
+              to be able to identify specific users. An argument,
+              called playerid, can be passed to the controller URL
+              to uniquely identify a user. Following our example
+              above, a player called JohnDoe, could be identified as
+              https://smartcontrollerjs.github.io/Controllers/touchpad
+              .html?id=123456789playerid=JohnDoe. <br><br>
+              This is helpful for multiplayers games where we need
+              3
+              FIG. 2. Flow chart of basic steps to establish the peer-to-peer connection and send data.
+              to ensure a user is assigned a specific role. We include an
+              optional parameter, called firstConnected, to limit connection for a player ID to the first person
+              connecting, as
+              shown in Figure 2. This is useful to ensure a user does
+              not get kicked out of a session in mid-play. If there is
+              a player ID specified and firstConnected is true, SmartController will check if an ID is already stored in
+              the
+              connection list. If yes, no further connections to that ID
+              will be allowed. If firstConnected is set to false, every
+              new connection to the same player ID will overwrite the
+              original one.</p>
+          </div>
+          <div class="column">
+            <h3>Controllers</h3>
+            <p>The foundation of each controller type is a BaseController class, which is responsible for processing
+              data
+              for individual smartphones. As this is the most basic,
+              default version of a controller object, it only stores a
+              peer ID, a player ID (if specified), and statistic fields
+              for ping and message rate. For simplicity, each new
+              controller is created by extending this class and adding
+              new fields to expand the functionality. <br><br>
+              In the smartphone browser, controllers only need
+              to use the SmartPhoneController class to manage
+              connection and send data to the user. The community
+              has already created a range of controllers hosted on
+              GitHub that can be reused in their browser application.
+              Current controllers include a NES controller, a joystick,
+              a touchpad and an accelerometer. <br><br>
+              Each controller has a corresponding class that extends
+              BaseController and provides additional fields and methods specific to the controller. For example, the
+              TouchPad class adds a boolean isActive state that is True when
+              the player is interacting with the phone screen and False
+              otherwise, and the NesController class stores a button
+              dictionary containing the states of all buttons.
+            </p>
+          </div>
+        </div>
       </section>
 
       <hr>
@@ -212,7 +322,6 @@ const title = "SmartController.js";
   main {
     margin: auto;
     /* padding: 1em; */
-    max-width: 800%;
     overflow-x: hidden;
   }
 
@@ -220,7 +329,7 @@ const title = "SmartController.js";
     position: relative;
     font-family: sans-serif;
     min-height: 100vh;
-    max-width: 86%;
+    max-width: 90%;
     left: 14%;
     display: flex;
     flex-direction: column;
@@ -251,5 +360,27 @@ const title = "SmartController.js";
     border-radius: 30px;
     width: 50%;
     visibility: hidden;
+  }
+
+
+  .column {
+    float: left;
+    width: 31%;
+    margin-right: 1%;
+  }
+
+  .row {
+    margin-top: 5%;
+    margin-left: 3%;
+    margin-right: 1%;
+    left: 5%;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+
   }
 </style>
