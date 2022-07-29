@@ -57,52 +57,54 @@ const title = "SmartController.js";
     </script>
 
 
-<div class="wrapper">
-  <div class="sidebar">
-    <h2>SC.org</h2>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#smartcontroller">Smartcontroller.js</a></li>
-      <li><a href="#implemented">Implemented</a></li>
-      <li><a href="#experiments">Experiments</a></li>
-      <li><a href="#discussion">Discussion</a></li>
-      <li><a href="#future">Future Work</a></li>
-    </ul>
-  </div>
-</div>
+    <div class="wrapper">
+      <div class="sidebar">
+        <h2>SC.org</h2>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#smartcontroller">Smartcontroller.js</a></li>
+          <li><a href="#implemented">Implemented</a></li>
+          <li><a href="#experiments">Experiments</a></li>
+          <li><a href="#discussion">Discussion</a></li>
+          <li><a href="#future">Future Work</a></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="section-container">
-    <section id="home" style="background-color:#fef9ef">
-      <h1><span>{title}</span></h1>
+      <section id="home" style="background-color:#fef9ef">
+        <h1><span>{title}</span></h1>
 
-      <div class="scan-text">Scan me to begin</div>
-      <div class="qrcode" id="qrcode"></div>
-      <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
-      <div style="position:absolute; top:40%;">
-        <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
-      </div>
+        <div class="scan-text">Scan me to begin</div>
+        <div class="qrcode" id="qrcode"></div>
+        <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
+        <div style="position:absolute; top:40%;">
+          <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
+        </div>
 
-    </section>
-    <section id="smartcontroller" style="background-color:beige">
-      <Subheading title="What is SmartController.js">{title}</Subheading>
-    </section>
-    <section id="implemented" style="background-color:coral;">
-      <Subheading title="What did we implement?">{title}</Subheading>
-      <iframe style="position: relative; margin:auto;"
-        src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="920vw" height="460vh"></iframe>
-    </section>
-    <section id="experiments" style="background-color: lightpink;">
-      <Subheading title="Experiments + results">{title}</Subheading>
-      <iframe style="position: relative; margin: auto; top:3vh" src="https://smartcontrollerjs.github.io/Coin-Chaser/"
-        width="920vw" height="540vh"></iframe>
-    </section>
-    <section id="discussion" style="background-color:seagreen">
-      <Subheading title="Discussion + trends">{title}</Subheading>
-    </section>
-    <section id="future" style="background-color:antiquewhite">
-      <Subheading title="Future Work">{title}</Subheading>
-    </section>
-  </div>
+      </section>
+      <section id="smartcontroller">
+        <Subheading title="What is SmartController.js">{title}</Subheading>
+      </section>
+      <section id="implemented">
+        <Subheading title="What did we implement?">{title}</Subheading>
+
+        <iframe class="iframe-style" style="position: relative; margin:auto;"
+          src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="90%" height="720vh">
+        </iframe>
+      </section>
+      <section id="experiments" style="background-color: lightpink;">
+        <Subheading title="Experiments + results">{title}</Subheading>
+        <iframe style="position: relative; margin: auto; top:3vh" src="https://smartcontrollerjs.github.io/Coin-Chaser/"
+          width="920vw" height="540vh"></iframe>
+      </section>
+      <section id="discussion" style="background-color:seagreen">
+        <Subheading title="Discussion + trends">{title}</Subheading>
+      </section>
+      <section id="future" style="background-color:antiquewhite">
+        <Subheading title="Future Work">{title}</Subheading>
+      </section>
+    </div>
 
 
   </main>
@@ -120,7 +122,7 @@ const title = "SmartController.js";
     --astro-gradient: linear-gradient(0deg, #4F39FA, #DA62C4);
   }
 
- .wrapper {
+  .wrapper {
     position: relative;
   }
 
@@ -144,7 +146,7 @@ const title = "SmartController.js";
     padding: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 1px solid rgba(225, 225, 225, 0.05);
-  } 
+  }
 
   .wrapper .sidebar ul li a {
     color: #bdb8d7;
@@ -159,7 +161,7 @@ const title = "SmartController.js";
 
   .wrapper .sidebar ul li:hover a {
     color: #fff;
-  }  
+  }
 
   h1 {
     margin: 2rem 0;
@@ -208,11 +210,24 @@ const title = "SmartController.js";
     /* justify-content: baseline; */
     align-items: center;
     top: 0;
+    background-color: #fef9ef
   }
 
   .sticky {
     position: sticky;
     top: 0;
     text-align: center;
+  }
+
+  @media (max-width: 1440px) {
+    .iframe-style {
+      height: 84vh;
+      color: #4b4276
+    }
+
+    h1 {
+      color: red
+    }
+
   }
 </style>
