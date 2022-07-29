@@ -1,5 +1,9 @@
 # SmartControllerJS Blog
 
+## Master Site
+- ```https://gleaming-cuchufli-202b0c.netlify.app/```
+## Dev Site
+- ```https://dev--gleaming-cuchufli-202b0c.netlify.app/```
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
