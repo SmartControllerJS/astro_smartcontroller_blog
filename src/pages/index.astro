@@ -10,6 +10,55 @@ const title = "SmartController.js";
 
   <main>
 
+
+
+    <script is:inline src="https://unpkg.com/smartcontroller@3.2.7/dist/smartcontroller.min.js"> </script>
+
+    <script is:inline>
+      var pos = 0
+      var simplePeer;
+      var touchpad;
+
+      window.addEventListener('load', function () {
+        simplePeer = new smartcontroller.ScrollSmartController('123456789', firstConnected = true);
+        simplePeer.createQrCode('https://smartcontrollerjs.github.io/Controllers/blog_scroll.html', 'qrcode', 150, 150);
+
+        simplePeer.on("connection", function (data) {
+          console.log(simplePeer.controllerList)
+        })
+
+        simplePeer.on("data", function (data) {
+          touchpad = simplePeer.controllerList[0]
+
+          message = data.data.data;
+          if (message.type == "button") {
+            document.getElementById(message.button_id).scrollIntoView();
+          }
+          else if (message.type == "touchpad") {
+            touchpad = simplePeer.controllerList[0]
+
+            if (touchpad.isActive) {
+
+              if (touchpad.direction) {
+                pos = -25
+              }
+
+              else {
+                pos = 25
+              }
+
+            }
+
+          }
+          window.scrollBy(0, pos);
+        })
+
+
+      })
+
+    </script>
+
+
     <div class="wrapper">
       <div class="sidebar">
         <h2>SC.org</h2>
@@ -24,73 +73,38 @@ const title = "SmartController.js";
       </div>
     </div>
 
-    <script is:inline src="https://unpkg.com/smartcontroller@3.2.6/dist/smartcontroller.min.js"> </script>
+    <div class="section-container">
+      <section id="home" style="background-color:#fef9ef">
+        <h1><span>{title}</span></h1>
 
-    <script is:inline>
-      var pos = 0
-      var simplePeer;
-      var touchpad;
+        <div class="scan-text">Scan me to begin</div>
+        <div class="qrcode" id="qrcode"></div>
+        <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
+        <div style="position:absolute; top:40%;">
+          <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
+        </div>
 
-      window.addEventListener('load', function () {
-        simplePeer = new smartcontroller.ScrollSmartController('123456789', firstConnected = true);
-        simplePeer.createQrCode('https://smartcontrollerjs.github.io/Controllers/touchpad.html', 'qrcode', 150, 150, '1');
-
-        simplePeer.on("connection", function (data) {
-          console.log(simplePeer.controllerList)
-        })
-
-        simplePeer.on("data", function (data) {
-          touchpad = simplePeer.controllerList[0]
-
-          if (touchpad.isActive) {
-
-            if (touchpad.direction) {
-              pos = -15
-            }
-
-            else {
-              pos = 15
-            }
-
-          }
-
-
-          window.scrollBy(0, pos);
-        })
-
-
-      })
-
-    </script>
-
-
-
-    <section id="home" style="background-color:#fef9ef">
-      <h1><span>{title}</span></h1>
-
-      <div class="scan-text">Scan me to begin</div>
-      <div class="qrcode" id="qrcode"></div>
-      <div style="color:grey" class="qrcode">How does this work? Read on to find out</div>
-      <div style="position:absolute; top:40%;">
-        <Subheading title="An NPM library by SmartController.org">{title}</Subheading>
-      </div>
-
-    </section>
-    <section id="smartcontroller" style="background-color:beige">
-      <Subheading title="What is SmartController.js">{title}</Subheading>
-    </section>
-    <section id="implemented" style="background-color:coral">
-      <Subheading title="What did we implement?">{title}</Subheading>
-    </section>
-    <section id="experiments" style="background-color: lightpink;">
-      <Subheading title="Experiments + results">{title}</Subheading>
-    </section>
-    <section id="discussion" style="background-color:seagreen">
-      <Subheading title="Discussion + trends">{title}</Subheading>
-    </section>
-    <section id="future" style="background-color:antiquewhite">
-      <Subheading title="Future Work">{title}</Subheading>
-    </section>
+      </section>
+      <section id="smartcontroller" style="background-color:beige">
+        <Subheading title="What is SmartController.js">{title}</Subheading>
+      </section>
+      <section id="implemented" style="background-color:coral;">
+        <Subheading title="What did we implement?">{title}</Subheading>
+        <iframe style="position: relative; margin:auto;"
+          src="https://fraser-dempster.github.io/l4-project-interactive-game/" width="920vw" height="460vh"></iframe>
+      </section>
+      <section id="experiments" style="background-color: lightpink;">
+        <Subheading title="Experiments + results">{title}</Subheading>
+        <iframe style="position: relative; margin: auto; top:3vh" src="https://smartcontrollerjs.github.io/Coin-Chaser/"
+          width="920vw" height="540vh"></iframe>
+      </section>
+      <section id="discussion" style="background-color:seagreen">
+        <Subheading title="Discussion + trends">{title}</Subheading>
+      </section>
+      <section id="future" style="background-color:antiquewhite">
+        <Subheading title="Future Work">{title}</Subheading>
+      </section>
+    </div>
 
 
   </main>
@@ -109,14 +123,12 @@ const title = "SmartController.js";
   }
 
   .wrapper {
-    display: flex;
     position: relative;
   }
 
-
   .wrapper .sidebar {
     position: fixed;
-    width: 200px;
+    width: 16%;
     height: 100%;
     background: #4b4276;
     z-index: 1;
@@ -136,18 +148,6 @@ const title = "SmartController.js";
     border-top: 1px solid rgba(225, 225, 225, 0.05);
   }
 
-  h1 {
-    margin: 2rem 0;
-    font-size: 6em;
-    text-align: right;
-    height: fit-content;
-    position: absolute;
-    top: 30%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 10%;
-  }
-
   .wrapper .sidebar ul li a {
     color: #bdb8d7;
     display: block;
@@ -163,13 +163,25 @@ const title = "SmartController.js";
     color: #fff;
   }
 
-
-
+  h1 {
+    margin: 2rem 0;
+    font-size: 6vw;
+    text-align: right;
+    height: fit-content;
+    position: absolute;
+    top: 30%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 6%;
+  }
 
   .qrcode {
     right: 30%;
     position: relative;
     margin: 0;
+    font-size: 1vw;
+    /* width: 150;
+    height: 150; */
   }
 
   .scan-text {
@@ -177,70 +189,27 @@ const title = "SmartController.js";
     right: 30%;
     margin-top: 13%;
     position: relative;
-    font-size: 2em;
+    font-size: 2vw;
   }
 
   main {
     margin: auto;
     /* padding: 1em; */
-    max-width: 100%;
+    max-width: 800%;
+    overflow-x: hidden;
   }
 
   section {
     position: relative;
     font-family: sans-serif;
     min-height: 100vh;
+    max-width: 86%;
+    left: 14%;
     display: flex;
     flex-direction: column;
     /* justify-content: baseline; */
     align-items: center;
     top: 0;
-  }
-
-  .text-gradient {
-    font-weight: 900;
-    background-image: var(--astro-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 100% 200%;
-    background-position-y: 100%;
-    border-radius: 0.4rem;
-    animation: pulse 4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-
-    0%,
-    100% {
-      background-position-y: 0%;
-    }
-
-    50% {
-      background-position-y: 80%;
-    }
-  }
-
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    background: #4F39FA;
-    padding: 1.0rem;
-    border-radius: 0.4rem;
-    color: var(--color-bg);
-  }
-
-  .instructions code {
-    font-size: 0.875em;
-    border: 0.1em solid var(--color-border);
-    border-radius: 4px;
-    padding: 0.15em 0.25em;
-  }
-
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
   }
 
   .sticky {
