@@ -314,13 +314,92 @@ const title = "SmartController.js";
             </p>
           </div>
         </div>
-
-
       </section>
 
 
       <section id="future" style="background-color:antiquewhite">
         <Subheading title="Future Work">{title}</Subheading>
+
+        <div class="row">
+          <div class="column">
+            <p>
+              SmartController should prioritise controllers compatible with all devices and browsers. For example,
+              the joystick controller should be remade without using
+              the Nipple.js library to provide a joystick that works
+              correctly on all devices. The documentation on how to
+              implement a custom controller should also be improved,
+              with step-by-step instructions. In the same vein, we plan
+              to cover how to interface SmartController with various
+              game frameworks, such as Phaser and Unity, and will
+              include a dedicated section on multiplayer capabilities. <br><br>
+              Our aim is to expand the number and type of controllers available. For instance, modern phones have an
+              abundance of technology that is currently untapped such
+              as cameras, gyroscopes, proximity sensors, and more.
+              One could easily imagine detecting hand motion using
+              image recognition from a camera sensor and using it to
+              manipulate web-applications. This would complement
+              the current task of the SmartController and provide
+              a suitable alternative to using a smartphone’s touch
+              capabilities.
+
+            </p>
+          </div>
+          <div class="column">
+            <p>Beyond the library it-self, we believe the SmartController concept could be expanded in two directions.
+              The first direction is to enable A/B testing and the
+              hyper personalisation of controllers. Applying best
+              practices from web development to the development of
+              controllers might be a promising approach. For example,
+              players of mainstream gaming consoles, such as the
+              Playstation or Xbox, experience games using a unique
+              physical controller. However, some games might benefit
+              from extremely customised controllers and the quality of
+              these controllers could be decided by experimentation.
+              A/B testing is one way to do so in a data driven way.
+              Another approach could be to cluster users and ship a
+              different controller per user, or, even further, evolve or
+              optimise a controller to the needs and preferences of
+              a specific user. We have experimented at the extreme
+              end of this space with a PIN entering interface, called
+              IFTTT-PIN [6], that allows users to decide which button
+              to use for which action on the fly, without informing
+              the web-app, see IFFT-PIN. Combining IFTT-PIN
+              concepts with SmartControllerJS capabilities and A/B
+              testing principles is a promising way towards highly
+              customisable user interfaces.
+
+            </p>
+          </div>
+          <div class="column">
+            <p>
+              The second direction is to expand the SmartControllert concept to physical objects. Could we scan a
+              QR code on our TV and control it with our phone?
+              Could children’s toys be controlled that way? Could we
+              offer the user the ability to reprogram those physical
+              objects along with the interaction we propose with
+              SmartController? In the spirit of SmartController this
+              should be accomplished via a web page requiring no
+              installation, no server cost, and be easy to scale. <br><br>
+              We are exploring this using Espruino, a framework to
+              run Javascript on a microcontroller. With web-bluetooth
+              capabilities, it is possible to connect and reprogram a
+              device directly from your browser and on your phone.
+              We developed the Espruino Remote Uploader tool to
+              facilitate experimentation, for which a demo can be
+              found at https://cmurray95.github.io/espruino-remoteuploader/demos/puck/colour.html. The user can connect
+              to the device, upload custom code, and interact
+              with it via its smartphone. Pushing this concept further, we developed a self-driving robot that is
+              controlled
+              directly by a smartphone from a webpage. You can
+              find this project at https://github.com/Kirstin813/L4-
+              Individual-Project which includes many video demonstrations. <br><br>
+              If you have any questions, you
+              can raise an issue on GitHub at
+              https://github.com/SmartControllerJS/SmartController
+              or directly email the authors.
+            </p>
+          </div>
+        </div>
       </section>
 
     </div>
